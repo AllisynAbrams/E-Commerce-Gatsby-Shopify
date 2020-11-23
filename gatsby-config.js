@@ -1,3 +1,5 @@
+require("dotenv").config()
+
 module.exports = {
   siteMetadata: {
     title: `E-commerce`,
@@ -9,12 +11,26 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
+        // name: `images`,
+        // path: `${__dirname}/src/images`,
+        name: `src`,
+        path: `${__dirname}/src/`,
       },
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    {
+      resolve: "gatsby-source-shopify",
+      options: {
+        shopName: "allisynabramsecom",
+        // need to get access token!
+        accessToken: process.env.SHOPIFY_STOREFRONT_API_TOKEN,
+        apiVersion: "2020-10",
+        verbose: true,
+        paginationSize: 250,
+        includeCollections: ["shop"],
+      },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
