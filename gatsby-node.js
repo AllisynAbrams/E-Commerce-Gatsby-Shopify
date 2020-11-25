@@ -6,15 +6,13 @@
 
 // You can delete this file if you're not using it
 
-
 const path = require(`path`)
-
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   // Query for all products in Shopify
   const product = await graphql(`
-    query {
+    {
       allShopifyProduct(sort: { fields: [title] }) {
         edges {
           node {
@@ -40,9 +38,9 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-//  Query for all collections
+  //  Query for all collections
   const collections = await graphql(`
-    query {
+    {
       allShopifyCollection(sort: { fields: [title] }) {
         edges {
           node {
@@ -94,13 +92,9 @@ exports.createPages = async ({ graphql, actions }) => {
         productCount: node.products.length,
       },
     })
-  })  
-
+  })
 }
 
-
-
-
-// refs: 
+// refs:
 // https://www.gatsbyjs.cn/docs/building-an-ecommerce-site-with-shopify/#generating-a-page-for-each-product
 //  https://dev.to/idiglove/display-shopify-collections-in-your-gatsby-ecommerce-site-2459

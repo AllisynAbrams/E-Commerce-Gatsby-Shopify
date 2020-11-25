@@ -11,10 +11,10 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        // name: `images`,
-        // path: `${__dirname}/src/images`,
-        name: `src`,
-        path: `${__dirname}/src/`,
+        name: `pages`,
+        path: `src/pages`,
+        // name: `src`,
+        // path: `${__dirname}/src/`,
       },
     },
     `gatsby-transformer-sharp`,
@@ -23,12 +23,11 @@ module.exports = {
     {
       resolve: "gatsby-source-shopify",
       options: {
-        shopName: "allisynabramsecom",
-        // need to get access token!
-        accessToken: process.env.SHOPIFY_STOREFRONT_API_TOKEN,
+        shopName: process.env.GATSBY_SHOPIFY_STORE_NAME,
+        accessToken: process.env.GATSBY_SHOPIFY_STOREFRONT_ACCESS_TOKEN,
         apiVersion: "2020-10",
         verbose: true,
-        paginationSize: 250,
+        paginationSize: 100,
         includeCollections: ["shop"],
       },
     },
