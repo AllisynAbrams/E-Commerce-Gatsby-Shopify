@@ -33,6 +33,7 @@ section,
 summary {
   display: block;
 }
+
 audio,
 canvas,
 progress,
@@ -590,6 +591,25 @@ pre tt:before,
 pre tt:after {
   content: "";
 }
+header {
+  text-align: center;
+}
+
+.navbar {
+  padding: 0px 30px;
+  background: white;
+  margin-top: -30px;
+  margin-bottom: 30px;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  
+}
+
+p.nav-link-menu {
+  margin: 0px;
+  color: black;
+}
+
 @media only screen and (max-width: 480px) {
   html {
     font-size: 100%;
