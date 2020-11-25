@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from 'gatsby'
 import Layout from "../components/layout"
 
+// pageContext comes from the query to createPages in gatsby-node.js
 const CollectionTemplate = ({ pageContext }) => {
   const { collection, productCount } = pageContext
   console.log('this is collection', collection)

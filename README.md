@@ -14,7 +14,7 @@ E-commerce website
 
 ### Project Links
 
-[Live Project - WIP]
+[Live Project](https://allisynabramsecom.netlify.app/)
 
 [Git Repo](https://github.com/AllisynAbrams/E-Commerce-Project)
 

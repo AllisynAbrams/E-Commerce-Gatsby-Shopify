@@ -10,27 +10,56 @@ const path = require(`path`)
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
-  // Query for all products in Shopify
+  // Query for all products 
   const product = await graphql(`
     {
-      allShopifyProduct(sort: { fields: [title] }) {
+      allShopifyProduct {
         edges {
           node {
             title
+            description
+            productType
+            handle
+            tags
+            shopifyId
+            availableForSale
             images {
               originalSrc
+              id
+              localFile {
+                childImageSharp {
+                  fluid(maxHeight: 600) {
+                    tracedSVG
+                  }
+                }
+              }
             }
-            shopifyId
-            handle
-            description
-            availableForSale
             priceRange {
               maxVariantPrice {
                 amount
+                currencyCode
               }
               minVariantPrice {
                 amount
+                currencyCode
               }
+            }
+            variants {
+              title
+              price
+              sku
+              availableForSale
+              id
+              product {
+                tags
+                images {
+                  originalSrc
+                }
+              }
+              image {
+                originalSrc
+              }
+              shopifyId
             }
           }
         }
@@ -71,8 +100,8 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  // Iterate over all products and create a new page using a template
-  // The product "handle" is generated automatically by Shopify
+  // Iterate over all products and create a new page using the appropriate template file/path
+  // The product "handle" is generated automatically by Shopify and part of the above queries
   product.data.allShopifyProduct.edges.forEach(({ node }) => {
     createPage({
       path: `/product/${node.handle}`,
@@ -98,3 +127,4 @@ exports.createPages = async ({ graphql, actions }) => {
 // refs:
 // https://www.gatsbyjs.cn/docs/building-an-ecommerce-site-with-shopify/#generating-a-page-for-each-product
 //  https://dev.to/idiglove/display-shopify-collections-in-your-gatsby-ecommerce-site-2459
+// https://owlypixel.com/build-a-store-with-shopify-and-gatsby/#create-account
