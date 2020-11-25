@@ -40,6 +40,7 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
+//  Query for all collections
   const collections = await graphql(`
     query {
       allShopifyCollection(sort: { fields: [title] }) {
