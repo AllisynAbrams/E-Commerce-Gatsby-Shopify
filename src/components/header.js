@@ -8,7 +8,6 @@ const Header = ({ siteTitle }) => (
       background: `lightgrey`,
       marginBottom: `1.45rem`,
       lineHeight: `0.3`,
-      
     }}
   >
     <div
@@ -29,6 +28,15 @@ const Header = ({ siteTitle }) => (
           {siteTitle}
         </Link>
       </h1>
+      <i class="fas fa-heart" style={{ fontSize: `30px`, color: `black` }}></i>
+      <i class="fas fa-user" style={{ fontSize: `30px`, color: `black` }}></i>
+
+      <Link to="/cart/">
+        <i
+          class="fas fa-shopping-cart"
+          style={{ fontSize: `30px`, color: `black` }}
+        ></i>
+      </Link>
     </div>
   </header>
 )

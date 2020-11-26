@@ -22,13 +22,13 @@ const AllProducts = ({ data }) => {
               ${product.priceRange.maxVariantPrice.amount}
             </span>
           </div>
-          {product.variants.length > 1
+          {/* {product.variants.length > 1
             ? product.variants.map(variant => (
                 <div key={variant.title}>
                   <p>{variant.title}</p>
                 </div>
               ))
-            : null}
+            : null} */}
         </div>
       </Link>
     </div>

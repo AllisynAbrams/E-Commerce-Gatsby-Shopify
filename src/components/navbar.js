@@ -71,6 +71,7 @@ const Navigation = ({ data }) => {
         </Nav>
       </Collapse>
     </Navbar>
+    
   )
 }
 
