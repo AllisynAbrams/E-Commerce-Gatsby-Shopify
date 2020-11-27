@@ -1,6 +1,18 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {
+  faCoffee,
+  faAddressBook,
+  faAirFreshener,
+  faAmbulance,
+  faAtom,
+  faBus,
+  faCoins,
+  faDice,
+  faShoppingCart,
+} from "@fortawesome/free-solid-svg-icons"
 
 const Header = ({ siteTitle }) => (
   <header
@@ -32,10 +44,8 @@ const Header = ({ siteTitle }) => (
       <i class="fas fa-user" style={{ fontSize: `30px`, color: `black` }}></i>
 
       <Link to="/cart/">
-        <i
-          class="fas fa-shopping-cart"
-          style={{ fontSize: `30px`, color: `black` }}
-        ></i>
+        {/* <FontAwesomeIcon icon={faCoffee} size="1x" /> */}
+        <FontAwesomeIcon icon={faShoppingCart} size="2x"></FontAwesomeIcon>
       </Link>
     </div>
   </header>

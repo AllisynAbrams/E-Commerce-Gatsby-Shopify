@@ -3,6 +3,7 @@ import { Link, graphql } from "gatsby"
 import "bootstrap/dist/css/bootstrap.min.css"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const IndexPage = () => (
   <Layout>
@@ -18,11 +19,8 @@ const IndexPage = () => (
 
     <p>
       Disclaimer: Please don't actually attempt to order anything because these
-      product images are just borrowed from the Abercrombie website for the
-      purpose of a class project (Abercrombie is cool again and they always have
-      promotions..I think I personally drove 25% of their non-logo sales from
-      2016-present, so Abercrombie please hire me as a brand ambassador...or a
-      developer, thanks).
+      product images are just borrowed from the Abercrombie and Bloomingdale's websites for the
+      purpose of a class project.
     </p>
 
     <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}></div>
