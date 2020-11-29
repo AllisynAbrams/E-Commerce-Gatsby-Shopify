@@ -3,15 +3,9 @@ import PropTypes from "prop-types"
 import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
-  faCoffee,
-  faAddressBook,
-  faAirFreshener,
-  faAmbulance,
-  faAtom,
-  faBus,
-  faCoins,
-  faDice,
   faShoppingCart,
+  faHeart,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons"
 
 const Header = ({ siteTitle }) => (
@@ -23,13 +17,14 @@ const Header = ({ siteTitle }) => (
     }}
   >
     <div
+      className="header-container"
       style={{
         margin: `0 auto`,
         maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
+        padding: `.65rem 1.0875rem`,
       }}
     >
-      <h1 style={{ margin: 0 }}>
+      <h1 className="sitetitle" style={{ margin: 0 }}>
         <Link
           to="/"
           style={{
@@ -40,13 +35,31 @@ const Header = ({ siteTitle }) => (
           {siteTitle}
         </Link>
       </h1>
-      <i class="fas fa-heart" style={{ fontSize: `30px`, color: `black` }}></i>
-      <i class="fas fa-user" style={{ fontSize: `30px`, color: `black` }}></i>
 
-      <Link to="/cart/">
-        {/* <FontAwesomeIcon icon={faCoffee} size="1x" /> */}
-        <FontAwesomeIcon icon={faShoppingCart} size="2x"></FontAwesomeIcon>
-      </Link>
+      {/* <i class="fas fa-heart" style={{ fontSize: `30px`, color: `black` }}></i> */}
+
+      <div className="dashboard-container">
+        <FontAwesomeIcon
+          icon={faHeart}
+          size="2x"
+          className="fa-icon"
+        ></FontAwesomeIcon>
+
+        <FontAwesomeIcon
+          icon={faUser}
+          size="2x"
+          className="fa-icon"
+        ></FontAwesomeIcon>
+
+        <Link to="/cart/">
+          <FontAwesomeIcon
+            icon={faShoppingCart}
+            size="2x"
+            color="black"
+            className="fa-icon"
+          ></FontAwesomeIcon>
+        </Link>
+      </div>
     </div>
   </header>
 )

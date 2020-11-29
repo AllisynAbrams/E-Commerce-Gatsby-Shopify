@@ -595,6 +595,17 @@ header {
   text-align: center;
 }
 
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sitetitle {
+  justify-self: center;
+  font-size: 30px;
+}
+
 .navbar {
   padding: 0px 30px;
   background: white;
@@ -608,6 +619,15 @@ header {
 p.nav-link-menu {
   margin: 0px;
   color: black;
+}
+
+.dashboard-container {
+  display: flex;
+  justify-self: end;
+}
+
+.fa-icon {
+  padding: 0px 4px;
 }
 
 @media only screen and (max-width: 480px) {

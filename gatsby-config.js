@@ -41,7 +41,19 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/bag.png`, // This path is relative to the root of the site.
+        icon: `src/images/bagfavicon.png`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: `gatsby-plugin-shopify-buy`,
+      options: {
+        stores: {
+          anyKeyForYourStore: {
+            domain: `${process.env.GATSBY_SHOPIFY_STORE_NAME}.myshopify.com`,
+            storefrontAccessToken:
+              process.env.GATSBY_SHOPIFY_STOREFRONT_ACCESS_TOKEN,
+          },
+        },
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

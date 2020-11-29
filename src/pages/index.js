@@ -3,7 +3,7 @@ import { Link, graphql } from "gatsby"
 import "bootstrap/dist/css/bootstrap.min.css"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+
 
 const IndexPage = () => (
   <Layout>

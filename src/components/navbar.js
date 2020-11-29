@@ -71,10 +71,8 @@ const Navigation = ({ data }) => {
         </Nav>
       </Collapse>
     </Navbar>
-    
   )
 }
-
 
 // export const query = graphql(`
 //   query {

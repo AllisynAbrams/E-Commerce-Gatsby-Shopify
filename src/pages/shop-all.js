@@ -58,6 +58,7 @@ export const query = graphql`
         productType
         variants {
           title
+          shopifyId
           image {
             localFile {
               childImageSharp {
