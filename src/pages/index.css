@@ -17,3 +17,8 @@
   padding: 6px 20px 6px 12px;
   text-align: left;
 }
+
+main {
+  display: flex;
+  flex-flow: row wrap;
+}

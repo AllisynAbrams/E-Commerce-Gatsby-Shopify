@@ -11,7 +11,7 @@ const ProductTemplate = ({ data }) => {
   // console.log("this is product/data - ", product)
 
   const variants = data.shopifyProduct.variants
-  console.log("variants - ", variants)
+  // console.log("variants - ", variants)
 
   // const sizes = product.options.find(option => option.name === "Size").values
   // console.log("this is sizes", sizes)
@@ -57,18 +57,18 @@ const ProductTemplate = ({ data }) => {
     setSelectedQty(e.target.value)
   }
 
-  console.log("selectedQty - ", selectedQty)
-  console.log("this is size - ", size)
+  console.log("this is selectedQty - ", selectedQty)
+  console.log("this is selected size variant- ", size)
   console.log("this is variant - ", variant)
 
   const addToCart = (variantId, quantity) => {
     const cartArray = [...cart]
     // const variantIndex = cartArray.indexOf(variant);
     // if (variantIndex < 0) {
-    cartArray.push(`variant: ${variantId}`)
+    cartArray.push({variantId})
     console.log(`adding ${variant} to cart`)
     setCart(cartArray)
-    console.log("this is cart", cart)
+    console.log("this is cart - ", cart)
     // }
   }
 
@@ -138,16 +138,16 @@ const ProductTemplate = ({ data }) => {
       <div>{product.description}</div>
 
       {/*--------- TESING ---------*/}
-      <p css={{ color: `red`, fontSize: `14px` }}>TESTING STATE:</p>
+      {/* <p css={{ color: `red`, fontSize: `14px` }}>TESTING STATE:</p>
       <p css={{ color: `red`, fontSize: `14px` }}>selected size: {size}</p>
       <p css={{ color: `red`, fontSize: `14px` }}>
         selected qty: {selectedQty}
-      </p>
+      </p> */}
       {/*--------- TESING ---------*/}
 
       <form id="product-form" className="product-add">
         <div className="sizes">
-          <p>Selected Size: {size}</p>
+        
           <ButtonGroup>
             {product.variants.map((variant, i) => (
               <div key={variant.id}>
