@@ -135,6 +135,7 @@ const ProductTemplate = ({ data }) => {
         {/* </div> */}
       </div>
       <h3>{product.title}</h3>
+      <h4>{product.variants[0].price}</h4>
       <div>{product.description}</div>
 
       {/*--------- TESING ---------*/}
@@ -147,7 +148,6 @@ const ProductTemplate = ({ data }) => {
 
       <form id="product-form" className="product-add">
         <div className="sizes">
-        
           <ButtonGroup>
             {product.variants.map((variant, i) => (
               <div key={variant.id}>
@@ -215,6 +215,7 @@ export const query = graphql`
       variants {
         shopifyId
         id
+        price
         selectedOptions {
           name
           value
