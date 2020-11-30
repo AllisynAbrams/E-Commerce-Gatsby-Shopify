@@ -1,0 +1,19 @@
+.hp-image-link {
+  color: black;
+  border-radius: 5px;
+  font-size: 12px;
+  margin-top: -20px;
+}
+
+.hp-overlay {
+  position: absolute;
+  width: 35%;
+  display: inline;
+  background: rgba(0, 0, 0, 0.651);
+  color: white;
+  font-size: 12px;
+  margin: 30px 0px 0px 10px;
+  font-weight: 600;
+  padding: 6px 20px 6px 12px;
+  text-align: left;
+}

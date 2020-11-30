@@ -613,11 +613,16 @@ header {
   margin-bottom: 30px;
   border-top: 2px solid black;
   border-bottom: 2px solid black;
-  
+  display: flex;
+  align-items: center;
 }
 
 p.nav-link-menu {
   margin: 0px;
+  color: black;
+}
+
+.nav-link a {
   color: black;
 }
 
@@ -634,4 +639,27 @@ p.nav-link-menu {
   html {
     font-size: 100%;
   }
+
+/* -------- MEDIA QUERY TABLET-------- */
+
+@media (min-width: 768px) {
+
+  p.nav-link-menu {
+  display: block;
+  }
+   
+  .mr-2.navbar-toggler {
+      display: none;
+  }
+
+}
+
+
+/* -------- MEDIA QUERY DESKTOP-------- */
+
+@media (min-width: 1024px) {
+
+}
+
+
 }

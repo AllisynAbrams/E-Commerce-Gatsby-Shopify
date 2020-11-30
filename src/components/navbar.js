@@ -27,7 +27,7 @@ const Navigation = ({ data }) => {
           </Link>
       ))} */}
 
-      <Link to="/shop-all">
+      <Link to="/collection/shop-all">
         <p className="nav-link-menu">Shop All</p>
       </Link>
 
@@ -43,10 +43,10 @@ const Navigation = ({ data }) => {
         <p className="nav-link-menu">Best of Basics</p>
       </Link>
 
-      <form>
+      {/* <form>
         <input type="text" placeholder="search" name="search"></input>
         <button type="submit">search</button>
-      </form>
+      </form> */}
 
       {/* MOBILE NAV */}
 
