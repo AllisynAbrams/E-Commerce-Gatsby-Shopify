@@ -16,18 +16,18 @@ const ProductTemplate = ({ data }) => {
   // const sizes = product.options.find(option => option.name === "Size").values
   // console.log("this is sizes", sizes)
 
-  const { store, setStore } = useContext(StoreContext)
+  const { store, setStore, addToCart } = useContext(StoreContext)
   const [variant, setVariant] = useState(variants[0])
   const [size, setSize] = useState("S")
   const [selectedQty, setSelectedQty] = useState(1)
   // const addItemToCart = useAddItemToCart()
 
-  const [cart, setCart] = useState([
-    {
-      variantId: "",
-      quantity: ""
-    },
-  ])
+  // const [cart, setCart] = useState([
+  //   {
+  //     variantId: "",
+  //     quantity: ""
+  //   },
+  // ])
 
   //  const newVariant = product.variants.find(variant => {
   //     return variant.selectedOptions[0].value === size
@@ -58,60 +58,60 @@ const ProductTemplate = ({ data }) => {
   }
 
   console.log("this is selectedQty - ", selectedQty)
-  console.log("this is selected size variant- ", size)
+  console.log("this is size - ", size)
   console.log("this is variant - ", variant)
 
-  const addToCart = (variantId, quantity) => {
-    const cartArray = [...cart]
-    // const variantIndex = cartArray.indexOf(variant);
-    // if (variantIndex < 0) {
-    cartArray.push({variantId})
-    console.log(`adding ${variant} to cart`)
-    setCart(cartArray)
-    console.log("this is cart - ", cart)
-    // }
-  }
+  // const addToCart = (variantId, quantity) => {
+  //   const cartArray = [...cart]
+  //   // const variantIndex = cartArray.indexOf(variant);
+  //   // if (variantIndex < 0) {
+  //   cartArray.push({variantId})
+  //   console.log(`adding ${variant} to cart`)
+  //   setCart(cartArray)
+  //   console.log("this is cart - ", cart)
+  //   // }
+  // }
 
   // /*--------- ADD TO CART FUNCTION ---------*/
-  // const addToCart = async (variantId, quantity) => {
-  //   if (variantId === "" || !quantity) {
-  //     console.log("missing size and/or quantity - both are required")
-  //     return
-  //   }
-  //   setStore(prevState => {
-  //     return { ...prevState, isAdding: true }
-  //   })
+  const addVariantToCart = async (variantId, quantity) => {
+    if (variantId === "" || !quantity) {
+      console.log("missing size and/or quantity - both are required")
+      return
+    }
+    setStore(prevState => {
+      return { ...prevState, isAdding: true }
+    })
 
-  //   const { client, checkout } = store
+    const { client, checkout } = store
 
-  //   // checkoutId is a reference to what session this user is on
-  //   const checkoutId = checkout.id
+    // checkoutId is a reference to what session this user is on
+    const checkoutId = checkout.id
 
-  //   // lineItems are an array of the items a user adds to the cart
-  //   const lineItemsToAdd = [{ variantId, quantity: parseInt(quantity, 10) }]
+    // lineItems are an array of the items a user adds to the cart
+    const lineItemsToAdd = [{ variantId, quantity: parseInt(quantity, 10) }]
 
-  //   const newCheckout = await client.checkout.addLineItems(
-  //     checkoutId,
-  //     lineItemsToAdd
-  //   )
+    const newCheckout = await client.checkout.addLineItems(
+      checkoutId,
+      lineItemsToAdd
+    )
 
-  //   // return client.checkout
-  //   //   .addLineItems(checkoutId, lineItemsToAdd)
-  //   //   .then(checkout => {
-  //   //     setStore(prevState => {
-  //   //       return { ...prevState, checkout, isAdding: false }
-  //   //     })
-  //   //   })
+    return client.checkout
+      .addLineItems(checkoutId, lineItemsToAdd)
+      .then(checkout => {
+        setStore(prevState => {
+          return { ...prevState, checkout, isAdding: false }
+        })
+      })
 
-  //   setStore(prevState => {
-  //     return { ...prevState, checkout: newCheckout, isAdding: false }
-  //   })
-  // }
+    // setStore(prevState => {
+    //   return { ...prevState, checkout: newCheckout, isAdding: false }
+    // })
+  }
 
   // /*--------- ADD TO CART FUNCTION ---------*/
   const handleAddToCart = e => {
     e.preventDefault()
-    addToCart(size, selectedQty)
+    addToCart(variant.shopifyId, selectedQty)
   }
 
   // console.log("this is store - ", store)

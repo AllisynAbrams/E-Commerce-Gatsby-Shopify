@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useContext } from "react"
 import Client from "shopify-buy"
 
+
 // ref:
 // **** https://shopify.github.io/js-buy-sdk/index.html
 // https://github.com/ginlane/gatsby-plugin-shopify-buy
@@ -20,7 +21,7 @@ const client = Client.buildClient({
 )
 
 // // setting initial store state to use as inital state object
-let initialStoreState = {
+const initialStoreState = {
   client,
   isAdding: false,
   checkout: { lineItems: [] },
@@ -141,46 +142,60 @@ const StoreContextProvider = ({ children }) => {
       value={{
         store,
         setStore,
-         addToCart: (variantId, quantity) => {
-    if (variantId === "" || !quantity) {
-      console.log("missing size and/or quantity - both are required")
-      return
-    }
-    setStore(prevState => {
-      return { ...prevState, isAdding: true }
-    })
+        addToCart: (variantId, quantity) => {
+          if (variantId === "" || !quantity) {
+            console.log("missing size and/or quantity - both are required")
+            return
+          }
+          setStore(prevState => {
+            return { ...prevState, isAdding: true }
+          })
 
-    const { client, checkout } = store
+          const { client, checkout } = store
 
-    // checkoutId is a reference to what session this user is on
-    const checkoutId = checkout.id
+          // checkoutId is a reference to what session this user is on
+          const checkoutId = checkout.id
 
-    // lineItems are an array of the items a user adds to the cart
-    const lineItemsToAdd = [{ variantId, quantity: parseInt(quantity, 10) }]
+          // lineItems are an array of the items a user adds to the cart
+          const lineItemsToAdd = [
+            { variantId, quantity: parseInt(quantity, 10) },
+          ]
 
-    // const newCheckout = await client.checkout.addLineItems(
-    //   checkoutId,
-    //   lineItemsToAdd
-    // )
+          // const newCheckout = await client.checkout.addLineItems(
+          //   checkoutId,
+          //   lineItemsToAdd
+          // )
 
-    return client.checkout
-      .addLineItems(checkoutId, lineItemsToAdd)
-      .then(checkout => {
-        setStore(prevState => {
-          return { ...prevState, checkout, isAdding: false }
-        })
-      })
+          return client.checkout
+            .addLineItems(checkoutId, lineItemsToAdd)
+            .then(checkout => {
+              setStore(prevState => {
+                return { ...prevState, checkout, isAdding: false }
+              })
+            })
 
-    // setStore(prevState => {
-    //   return { ...prevState, checkout: newCheckout, isAdding: false }
-    // })
-  } 
+          // setStore(prevState => {
+          //   return { ...prevState, checkout: newCheckout, isAdding: false }
+          // })
+        },
+        removeLineItem: (client, checkoutID, lineItemID) => {
+          return client.checkout
+            .removeLineItems(checkoutID, [lineItemID])
+            .then(res => {
+              setStore(prevState => {
+                return { ...prevState, checkout: res }
+              })
+            })
+        },
       }}
     >
       {children}
     </StoreContext.Provider>
   )
 }
+
+
+// -------------------------------------------
 
 
 
