@@ -11,7 +11,7 @@ import Client from "shopify-buy"
 // https://tuts.alexmercedcoder.com/reacthooks/
 // https://reactjs.org/docs/hooks-custom.html
 
-// const SHOPIFY_CHECKOUT_STORAGE_KEY = "shopify_checkout_id"
+const SHOPIFY_CHECKOUT_STORAGE_KEY = "shopify_checkout_id"
 
 // we are "building" or "initializing" the client to return our store's content
 const client = Client.buildClient({
@@ -21,7 +21,7 @@ const client = Client.buildClient({
 )
 
 // // setting initial store state to use as inital state object
-const initialStoreState = {
+let initialStoreState = {
   client,
   isAdding: false,
   checkout: { lineItems: [] },
@@ -38,6 +38,30 @@ const StoreContext = React.createContext(
 )
 
 console.log("this is StoreContext", StoreContext)
+
+
+// ---------------------------------------- //
+
+function createNewCheckout(store) {
+  return store.checkout.create()
+}
+
+function fetchCheckout(store, id) {
+  return store.client.checkout.fetch(id)
+}
+
+function setCheckoutInState(checkout, setStore) {
+  const isBrowser = typeof window !== "undefined"
+  if (isBrowser) {
+    localStorage.setItem(SHOPIFY_CHECKOUT_STORAGE_KEY, checkout.id)
+  }
+
+  setStore(prevState => {
+    return { ...prevState, checkout }
+  })
+}
+
+// ---------------------------------------- //
 
 // // const createNewCheckout = store => {
 // //   return store.checkout.create()
@@ -72,7 +96,7 @@ console.log("this is StoreContext", StoreContext)
 /* -------- STORE CONTEXT PROVIDER -------- */
 
 const StoreContextProvider = ({ children }) => {
-  const SHOPIFY_CHECKOUT_STORAGE_KEY = "shopify_checkout_id"
+//   const SHOPIFY_CHECKOUT_STORAGE_KEY = "shopify_checkout_id"
 
 
   const [store, setStore] = useState(initialStoreState)
@@ -86,39 +110,10 @@ const StoreContextProvider = ({ children }) => {
         ? localStorage.getItem(SHOPIFY_CHECKOUT_STORAGE_KEY)
         : null
 
-      const setCheckoutInState = (checkout, setStore) => {
-        const isBrowser = typeof window !== "undefined"
-        // if type of window is NOT undefined (aka anything other than undefined) then statement is TRUE
-        if (isBrowser) {
-          // setItem takes in two params, a key and a value, to create a new key/value pair if a value doesn't already exist for the key
-          localStorage.setItem(SHOPIFY_CHECKOUT_STORAGE_KEY, checkout.id)
-        }
-
-        setStore(prevState => {
-          return { ...prevState, checkout }
-        })
-      }
-
-      // setStore explaination:
-      // ref: https://stackoverflow.com/questions/54807454/what-is-prevstate-in-reactjs
-      // ref: https://reactjs.org/docs/state-and-lifecycle.html
-      // ref: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
-      // prevState comes from React's setState hook
-      // in the above setStore we are using the functional setState =>  rather than just the objects of prevState & "current props" because when they are just objects they can be updated asynchronously and may not update to be what we actually want (AKA the current state may not actually get overwritten as we are expecting).
-      // "To fix it, use a second form of setState() that accepts a function rather than an object. That function will receive the previous state as the first argument, and the props at the time the update is applied as the second argument" -reactdocs
-      // above setStore we are using spread operator to clone the prevState object and then update the value of the prevState checkout key to the value of the current checkout key
-
-      const createNewCheckout = store => {
-        return store.checkout.create()
-      }
-
-      const fetchACheckout = (store, id) => {
-        return store.client.checkout.fetch(id)
-      }
-
-      if (existingCheckoutId) {
+         if (existingCheckoutId) {
         try {
-          const checkout = await fetchACheckout(client, existingCheckoutId)
+          const checkout = await fetchCheckout(client, existingCheckoutId)
+          // Make sure this cart hasn’t already been purchased.
           if (!checkout.completedAt) {
             setCheckoutInState(checkout, setStore)
             return
@@ -134,6 +129,58 @@ const StoreContextProvider = ({ children }) => {
 
     initializeCheckout()
   }, [])
+
+
+
+
+    //   const setCheckoutInState = (checkout, setStore) => {
+    //     const isBrowser = typeof window !== "undefined"
+    //     // if type of window is NOT undefined (aka anything other than undefined) then statement is TRUE
+    //     if (isBrowser) {
+    //       // setItem takes in two params, a key and a value, to create a new key/value pair if a value doesn't already exist for the key
+    //       localStorage.setItem(SHOPIFY_CHECKOUT_STORAGE_KEY, checkout.id)
+    //     }
+
+    //     setStore(prevState => {
+    //       return { ...prevState, checkout }
+    //     })
+    //   }
+
+      // setStore explaination:
+      // ref: https://stackoverflow.com/questions/54807454/what-is-prevstate-in-reactjs
+      // ref: https://reactjs.org/docs/state-and-lifecycle.html
+      // ref: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
+      // prevState comes from React's setState hook
+      // in the above setStore we are using the functional setState =>  rather than just the objects of prevState & "current props" because when they are just objects they can be updated asynchronously and may not update to be what we actually want (AKA the current state may not actually get overwritten as we are expecting).
+      // "To fix it, use a second form of setState() that accepts a function rather than an object. That function will receive the previous state as the first argument, and the props at the time the update is applied as the second argument" -reactdocs
+      // above setStore we are using spread operator to clone the prevState object and then update the value of the prevState checkout key to the value of the current checkout key
+
+//       const createNewCheckout = store => {
+//         return store.checkout.create()
+//       }
+
+//       const fetchACheckout = (store, id) => {
+//         return store.client.checkout.fetch(id)
+//       }
+
+//       if (existingCheckoutId) {
+//         try {
+//           const checkout = await fetchACheckout(client, existingCheckoutId)
+//           if (!checkout.completedAt) {
+//             setCheckoutInState(checkout, setStore)
+//             return
+//           }
+//         } catch (e) {
+//           localStorage.setItem(SHOPIFY_CHECKOUT_STORAGE_KEY, null)
+//         }
+//       }
+
+//       const newCheckout = await createNewCheckout(client)
+//       setCheckoutInState(newCheckout, setStore)
+//     }
+
+//     initializeCheckout()
+//   }, [])
 
  
 
