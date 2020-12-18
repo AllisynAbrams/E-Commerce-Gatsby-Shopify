@@ -7,7 +7,7 @@ import {
   ProductCard,
   ProductTitle,
   Price, Fave
-} from "./styles"
+} from "./collection-styles"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHeart } from "@fortawesome/free-solid-svg-icons"
 import index from "../pages/index.css"

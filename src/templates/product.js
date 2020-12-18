@@ -5,6 +5,10 @@ import { Button, ButtonGroup } from "reactstrap"
 import { graphql } from "gatsby"
 import { StoreContext, useAddItemToCart } from "../context/StoreContext"
 import Container from "../components/container"
+import { ProductCard } from "./collection-styles"
+import { PrimaryProductImage, ProductTitle, Price } from "./product-styles"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faHeart } from "@fortawesome/free-solid-svg-icons"
 
 const ProductTemplate = ({ data }) => {
   const product = data.shopifyProduct
@@ -118,33 +122,21 @@ const ProductTemplate = ({ data }) => {
 
   return (
     <Layout>
-      <div className="card card-product-grid">
-        {/* <div className="img-wrap"> */}
-        <Container>
-          {product.images.map(image => (
-            <img
-              src={image.originalSrc}
-              key={image.id}
-              alt={product.title}
-              style={{
-                height: `300px`,
-              }}
-            />
-          ))}
-        </Container>
-        {/* </div> */}
-      </div>
-      <h3>{product.title}</h3>
-      <h4>{product.variants[0].price}</h4>
-      <div>{product.description}</div>
+      <ProductCard>
+        {product.images.map(image => (
+          <PrimaryProductImage
+            src={image.originalSrc}
+            key={image.id}
+            alt={product.title}
+          />
+           
+         
+        ))}
 
-      {/*--------- TESING ---------*/}
-      {/* <p css={{ color: `red`, fontSize: `14px` }}>TESTING STATE:</p>
-      <p css={{ color: `red`, fontSize: `14px` }}>selected size: {size}</p>
-      <p css={{ color: `red`, fontSize: `14px` }}>
-        selected qty: {selectedQty}
-      </p> */}
-      {/*--------- TESING ---------*/}
+        <ProductTitle>{product.title}</ProductTitle>
+        <Price>${product.variants[0].price}</Price>
+      </ProductCard>
+      <div>{product.description}</div>
 
       <form id="product-form" className="product-add">
         <div className="sizes">

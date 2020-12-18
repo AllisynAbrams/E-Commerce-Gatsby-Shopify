@@ -32,7 +32,6 @@ export const ProductCard = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-//   justify-content: flex-start;
   min-width: 0;
   word-wrap: break-word;
   background-color: #fff;
@@ -44,11 +43,13 @@ export const ProductTitle = styled.h3`
 font-size: 14px;
 font-weight: 500;
 padding-left: 4px;
+margin-bottom: 0;
 `
 
 export const Price = styled.p`
   font-size: 14px;
   padding-left: 4px;
+  display: block;
 `
 
 export const Fave = styled.div`
@@ -59,5 +60,4 @@ export const Fave = styled.div`
   margin: 3px;
   padding: 0 1.5px;
   z-index: 1;
-  
 `
