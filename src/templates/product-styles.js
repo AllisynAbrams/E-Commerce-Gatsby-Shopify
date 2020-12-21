@@ -18,6 +18,7 @@ export const ProductTitle = styled.h3`
   font-size: 24px;
   font-weight: 500;
   margin-bottom: 0;
+  margin-top: 10px;
 `
 
 export const Price = styled.p`
@@ -32,4 +33,24 @@ export const Fave = styled.div`
   margin: 3px;
   padding: 0 1.5px;
   z-index: 1;
+`
+
+export const ProductDescription = styled.p`
+  font-size: 16px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+`
+
+export const QtySelect = styled.div`
+margin-top: 15px;
+display: flex;
+flex-flow: column wrap;
+`
+
+export const AddToCartButton = styled.button`
+background: black;
+color: white;
+padding: 2px 10px;
+border-radius: 4px;
+margin: 20px auto 0px;
 `

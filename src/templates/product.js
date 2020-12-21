@@ -6,7 +6,14 @@ import { graphql } from "gatsby"
 import { StoreContext, useAddItemToCart } from "../context/StoreContext"
 import Container from "../components/container"
 import { ProductCard } from "./collection-styles"
-import { PrimaryProductImage, ProductTitle, Price } from "./product-styles"
+import {
+  PrimaryProductImage,
+  ProductTitle,
+  Price,
+  ProductDescription,
+  QtySelect,
+  AddToCartButton,
+} from "./product-styles"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHeart } from "@fortawesome/free-solid-svg-icons"
 
@@ -129,17 +136,15 @@ const ProductTemplate = ({ data }) => {
             key={image.id}
             alt={product.title}
           />
-           
-         
         ))}
 
         <ProductTitle>{product.title}</ProductTitle>
         <Price>${product.variants[0].price}</Price>
       </ProductCard>
-      <div>{product.description}</div>
 
       <form id="product-form" className="product-add">
         <div className="sizes">
+          <p css={{ marginBottom: `8px`, marginTop: `-4px` }}>Size:</p>
           <ButtonGroup>
             {product.variants.map((variant, i) => (
               <div key={variant.id}>
@@ -149,7 +154,7 @@ const ProductTemplate = ({ data }) => {
                   name="size"
                   onClick={() => setSize(`${variant.shopifyId}`)}
                   active={size === `${variant.selectedOptions[0].value}`}
-                  css={{ margin: `5px` }}
+                  css={{ marginRight: `5px`, display: `block` }}
                 >
                   {variant.selectedOptions[0].value}
                 </Button>
@@ -158,20 +163,26 @@ const ProductTemplate = ({ data }) => {
           </ButtonGroup>
         </div>
 
-        <label htmlFor="qty">Quantity</label>
-        <select name="qty" id="qty" onChange={handleQtyChange}>
-          <optgroup label="Qty">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </optgroup>
-        </select>
+        <QtySelect>
+          <label htmlFor="qty">Quantity:</label>
+          <select name="qty" id="qty" onChange={handleQtyChange}>
+            <optgroup label="Qty">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </optgroup>
+          </select>
+        </QtySelect>
 
-        <button type="submit" onClick={handleAddToCart}>
+        <AddToCartButton type="submit" onClick={handleAddToCart}>
           Add to Cart
-        </button>
+        </AddToCartButton>
       </form>
+
+      <ProductDescription>
+        <b>Product Description:</b> <br /> {product.description}
+      </ProductDescription>
 
       {/* <pre>{JSON.stringify(product, null, 2)}</pre> */}
     </Layout>
